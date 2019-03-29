@@ -24,7 +24,9 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import java.util.Hashtable;
 
 /**
- * Created by lzzy_gxy on 2019/3/11.
+ *
+ * @author lzzy_gxy
+ * @date 2019/3/11
  * Description:
  */
 public class AppUtils extends Application {

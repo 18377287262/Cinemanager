@@ -16,12 +16,15 @@ import net.lzzy.cinemanager.R;
 import net.lzzy.cinemanager.fragments.AddCinemaFragment;
 import net.lzzy.cinemanager.fragments.AddOrderFragment;
 import net.lzzy.cinemanager.fragments.CinemasFragment;
+import net.lzzy.cinemanager.fragments.OnFragmentInteractionListener;
 import net.lzzy.cinemanager.fragments.OrderFragment;
+import net.lzzy.cinemanager.models.Cinema;
 
 /**
  * @author Administrator
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener , OnFragmentInteractionListener
+,AddCinemaFragment.OnCinemaCreatedListener{
     private FragmentManager manager=getSupportFragmentManager();
     private View layoutMenu;
     private SearchView search;
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
+        search.setVisibility(View.VISIBLE);
         layoutMenu.setVisibility(View.GONE);
         tvTitle.setText(titleArray.get(v.getId()));
         FragmentTransaction transaction=manager.beginTransaction();
@@ -89,11 +93,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bar_title_tv_view_order:
                 return  new OrderFragment();
             default:
-                break;
-
+                return  new OrderFragment();
         }
-        return null;
     }
+
+    @Override
+    public void hideSearch() {
+       search.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void cancelAddCinema() {
+
+    }
+
+    @Override
+    public void saveCinema(Cinema cinema) {
+
+    }
+
 
 }
 
