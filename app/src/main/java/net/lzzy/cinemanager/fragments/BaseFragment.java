@@ -1,5 +1,6 @@
 package net.lzzy.cinemanager.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import net.lzzy.cinemanager.utils.AppUtils;
 
 import java.util.Objects;
 
@@ -33,6 +36,21 @@ public  abstract class BaseFragment extends Fragment  {
         populate();
     }
 
+    <T extends View> T find(@IdRes int id) {
+        return Objects.requireNonNull(getView()).findViewById(id);
+    }
+
+    @Nullable
+    @Override
+    public Context getContext() {
+        Context context=getActivity();
+        if (context==null) {
+            context = AppUtils.getContext();
+        }
+        return context;
+
+    }
+
     /**
      * 执行onCreateView中初始化试图组件、填充数据的任务
      */
@@ -45,8 +63,7 @@ public  abstract class BaseFragment extends Fragment  {
      */
     public abstract int getLayoutRes();
 
-    <T extends View> T find(@IdRes int id){
-        return Objects.requireNonNull(getView()).findViewById(id);
-    }
+
+
     public abstract void search(String kw);
 }
